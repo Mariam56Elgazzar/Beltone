@@ -1,12 +1,15 @@
-from DataVerse_solver_40 import solver
-from robin_logistics import LogisticsEnvironment
+try:
+    from robin_logistics import LogisticsEnvironment  # type: ignore
+except Exception:  # pragma: no cover
+    from robin_logistics_env import LogisticsEnvironment  # type: ignore
+
+from solver import solver
 
 # 1. Initialize the Environment (Required)
 # NOTE: This line needs to be executed to create the 'env' object.
 env = LogisticsEnvironment()
 
 # 2. Get the Solution (Call your solver function)
-# WARNING: This will take several minutes due to the GA complexity.
 print("Running solver to generate solution...")
 solution = solver(env)
 print(f"Solver returned {len(solution.get('routes', []))} routes.")
